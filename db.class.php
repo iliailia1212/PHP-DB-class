@@ -1,5 +1,5 @@
 <?php
-Class bd{
+Class db{
 	private $mysqli;
 	public function connect($cfg){//Функция подключения ,при вызове передаём настройки с данными от бд
 		$this->mysqli = new mysqli($cfg['bd']['host'], $cfg['bd']['user'], $cfg['bd']['password'], $cfg['bd']['name']);//подключение к бд
