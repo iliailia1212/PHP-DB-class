@@ -13,7 +13,9 @@
     )
 ```
 ### read(string $table, [array  $columns], [array  $filter], [array  $order])
-Читает данные с таблице  
+Читает данные с таблице и возращает  ассоциативный массив ввида:  
+``` 'Ключ' => 'Данные' ```  
+
 ```$table``` - Название таблицы  
 ```$columns``` - Массив колонок  
 ```$filter``` -  [Фильтр](https://github.com/iliailia1212/db/blob/master/README.md#filter)  
