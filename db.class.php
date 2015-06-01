@@ -2,7 +2,7 @@
 Class db{
 	private $mysqli;
 	public function connect($cfg){//Функция подключения ,при вызове передаём настройки с данными от бд
-		$this->mysqli = new mysqli($cfg['bd']['host'], $cfg['bd']['user'], $cfg['bd']['password'], $cfg['bd']['name']);//подключение к бд
+		$this->mysqli = new mysqli($cfg['db']['host'], $cfg['db']['user'], $cfg['db']['password'], $cfg['db']['name']);//подключение к бд
 		if($this->mysqli->connect_errno !== 0) throw new Exception('Ошибка подключения к бд #'.$this->mysqli->connect_errno);
 		$this->mysqli->query("SET NAMES 'utf8'");//установка кодировки
 		$this->mysqli->set_charset("utf8");//установка кодировки
