@@ -1,13 +1,14 @@
 <?php
-Class db{
+Class bd{
 	private $mysqli;
 	public function connect($cfg){//Функция подключения ,при вызове передаём настройки с данными от бд
-		$this->mysqli = new mysqli($cfg['db']['host'], $cfg['db']['user'], $cfg['db']['password'], $cfg['db']['name']);//подключение к бд
+		$this->mysqli = new mysqli($cfg['bd']['host'], $cfg['bd']['user'], $cfg['bd']['password'], $cfg['bd']['name']);//подключение к бд
 		if($this->mysqli->connect_errno !== 0) throw new Exception('Ошибка подключения к бд #'.$this->mysqli->connect_errno);
 		$this->mysqli->query("SET NAMES 'utf8'");//установка кодировки
 		$this->mysqli->set_charset("utf8");//установка кодировки
 	}
 	public function read($table,$columns=array('*'),$filter=false,$order=false){//функция для получения данных из бд ,при вызове передаём: название таблица, [название столбцов], [дополнительный sql фильтр]
+		echo 'SELECT '.$this->columns($columns)." FROM `$table`".$this->filter($filter).$this->order($order);
 		return $this->changeToArray($this->mysqli->query('SELECT '.$this->columns($columns)." FROM `$table`".$this->filter($filter).$this->order($order)));//преобразовываем их в двух мерный массив и возращяем
 	}
 	public function create($table,$data){//добавления данных в бд, при вызове передаём: названия таблицы, массив вида 'название столбца'=>'данные'
@@ -46,8 +47,8 @@ Class db{
 	}
 	private function order($data) {//Функция для генерации sql соритровки
 		if(empty($data)) return '';//Если данные пустны, возращяем пустую строку
-		$data_n = $this->configs($data,array(array(true,'name'),array(false,'ASC')));//Генрируем массив с данными
-		return 'ORDER BY `$data_n[0]` $data_n[1]';//Возращаем данные в нужном виде
+		$data_n = $this->configs($data,array(array(true,'name'),array(false,'ASC'),array(false,' ')));//Генрируем массив с данными
+		return "ORDER BY `$data_n[0]` $data_n[1] $data_n[2]";//Возращаем данные в нужном виде
 	}
 	private function columns($data) {//Функция для генерации списка колонок
 		$list = array();//Создаём переменую для хранения колонок
@@ -60,7 +61,7 @@ Class db{
 		$i = 0;
 		foreach($def as $val){//Перебераем стандартные значения
 			if(!isset($arr[$i])) {//Если данных нету в массиве ,добавляем их из стандартных
-				if($def[$i][0]) throw new Exception('Ошибка при генерации массива настроек, обезательные данные не были переданы!');//Если эти данные обезатенльные ,то выводим ошибку
+				if($def[$i][0]) throw new Exception('Ошибка при генерации массива настроек, обезательные данные не были переданы! ['.var_export($def[$i],true).']');//Если эти данные обезатенльные ,то выводим ошибку
 				else $arr[$i] = $def[$i][1];//Если эти данные не обезательные берём их их стандартных данных
 			}
 			$i++;
