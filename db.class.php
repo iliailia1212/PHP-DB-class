@@ -48,7 +48,7 @@ Class bd{
 	private function order($data) {//Функция для генерации sql соритровки
 		if(empty($data)) return '';//Если данные пустны, возращяем пустую строку
 		$data_n = $this->configs($data,array(array(true,'name'),array(false,'ASC'),array(false,' ')));//Генрируем массив с данными
-		return "ORDER BY `$data_n[0]` $data_n[1] $data_n[2]";//Возращаем данные в нужном виде
+		return " ORDER BY `$data_n[0]` $data_n[1] $data_n[2]";//Возращаем данные в нужном виде
 	}
 	private function columns($data) {//Функция для генерации списка колонок
 		$list = array();//Создаём переменую для хранения колонок
