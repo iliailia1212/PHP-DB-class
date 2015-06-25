@@ -8,7 +8,6 @@ Class bd{
 		$this->mysqli->set_charset("utf8");//установка кодировки
 	}
 	public function read($table,$columns=array('*'),$filter=false,$order=false){//функция для получения данных из бд ,при вызове передаём: название таблица, [название столбцов], [дополнительный sql фильтр]
-		echo 'SELECT '.$this->columns($columns)." FROM `$table`".$this->filter($filter).$this->order($order);
 		return $this->changeToArray($this->mysqli->query('SELECT '.$this->columns($columns)." FROM `$table`".$this->filter($filter).$this->order($order)));//преобразовываем их в двух мерный массив и возращяем
 	}
 	public function create($table,$data){//добавления данных в бд, при вызове передаём: названия таблицы, массив вида 'название столбца'=>'данные'
