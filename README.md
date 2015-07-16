@@ -36,7 +36,7 @@
 ``` 'Ключ' => 'Данные' ```
 
 ### delete(string $table, [array  $filter])
-Удаляет данные из таблици  
+Удаляет данные из таблицы  
 ```$table``` - Название таблицы 
 ```$filter``` - [Фильтр](https://github.com/iliailia1212/db/blob/master/README.md#filter)  
 
