@@ -73,6 +73,7 @@ Class bd{
 			case 'boolean':
 				$str = $str?1:0;//Если данные типа boolean , то возращаем 1 или 0
 			break;
+			case 'double':
 			case 'integer':
 				$str = $str;//Если это цифра ,то так её и оставляем
 			break;
